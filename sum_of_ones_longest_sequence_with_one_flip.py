@@ -1,5 +1,8 @@
+## Find the longest sequence of 1’s with one flip.
 
 input = [1,1,0,1,1,0,1,0,1,1]
+
+# Expected output: 4
 
 def get_new_input(input):
     ones_total = 0
