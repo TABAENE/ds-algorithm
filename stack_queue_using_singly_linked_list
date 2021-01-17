@@ -1,0 +1,101 @@
+# Combine two linked list.
+
+
+class Node:
+    def __init__(self, val=None):
+        self.val = val
+        self.next = None
+
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, val):
+        node = Node(val)
+        node.next = self.top
+        self.top = node
+
+    def print_stack(self):
+        top = self.top
+        while top:
+            print(top.val, end='    ')
+            top = top.next
+        print("\n")
+
+    def convert_queue_into_stack(self, queue):
+        if not queue:
+            return
+        start = queue.front
+        while start:
+            self.push(start.val)
+            start = start.next
+
+
+class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    def add(self, val):
+        node = Node(val)
+        if not self.front:
+            self.front = node
+            self.rear = node
+            return True
+        self.rear.next = node
+        self.rear = node
+
+    def merge(self, queue):
+        if not isinstance(self, type(queue)):
+            print ("Object of different type can not be merged.")
+            return
+        temp_q = Queue()
+        q1_front = self.front
+        q2_front = queue.front
+        while q1_front or q2_front:
+            if q1_front:
+                temp_q.add(q1_front.val)
+                q1_front = q1_front.next
+            if q2_front:
+                temp_q.add(q2_front.val)
+                q2_front = q2_front.next
+        return temp_q
+
+
+    def print_queue(self):
+        front = self.front
+        while front:
+            print(front.val, end='  ')
+            front = front.next
+        print("\n")
+
+
+q1 = Queue()
+q1.add(1)
+q1.add(5)
+q1.add(10)
+q1.add(15)
+q1.print_queue()
+q2 = Queue()
+q2.add(5)
+q2.add(11)
+q2.add(12)
+q2.add(13)
+q2.print_queue()
+s = Stack()
+s.convert_queue_into_stack(q2)
+s.print_stack()
+merged_queue = q1.merge(q2)
+merged_queue.print_queue()
+
+"""
+Output:
+1  5  10  15  
+
+5  11  12  13  
+
+13    12    11    5    
+
+1  5  5  11  10  12  15  13  
+"""
