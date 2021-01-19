@@ -17,6 +17,7 @@ def count_ways(step_count):
     if step_count == 2:
         return 2
     # Bottom approach with below base case.
+    # difference between thjis stair case problem and fibonacci series is, it starts from 1.
     d = {1: 1, 2: 2}
     for i in range(3, step_count + 1):
         # value 1 step before + value 2 step before.
