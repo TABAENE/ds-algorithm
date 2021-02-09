@@ -1,4 +1,4 @@
-# Facebook/Google: Find if two binary search trees are equal ?
+# Facebook/Google: Find if two binary search trees contain same values and also if thet are equals (meaning same value and structure) ?
 
 
 class TreeNode:
