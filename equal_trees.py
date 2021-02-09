@@ -50,12 +50,35 @@ class BinaryTree:
         self.visited_nodes.append(root.val)
         self.in_order_traversal(root.right)
 
-    def have_same_values(self, tree):
-        # Checking in-order traversal of both trees.
-        if self.visited_nodes == tree.visited_nodes:
-            print("Trees are equal.")
-        else:
-            print("Trees are NOT equal.")
+    # @staticmethod
+    # def have_same_values(tree1, tree2):
+    #     tree1.in_order_traversal(tree1.root)
+    #     tree2.in_order_traversal(tree2.root)
+    #     # Checking in-order traversal of both trees.
+    #     if tree1.visited_nodes == tree2.visited_nodes:
+    #         print("Trees are having same values.")
+    #     else:
+    #         print("Trees are NOT identical.")
+
+    # Implemented using set.
+    @staticmethod
+    def have_same_values(tree1, tree2):
+        nodes = set()
+        equal = True
+        def scan_tree(tree, save=False):
+            nonlocal equal
+            if not tree:
+                return equal
+            if save:
+                nodes.add(tree.val)
+            elif tree.val not in nodes:
+                equal = False
+            scan_tree(tree.left, save)
+            scan_tree(tree.right, save)
+
+        scan_tree(tree1.root, save=True)
+        scan_tree(tree2.root)
+        return equal
 
     def equals(self, t1, t2):
 
@@ -81,22 +104,35 @@ class BinaryTree:
 # bt2.add(4, bt2.root)
 # # bt.print_tree(bt.root)
 #
-# bt1.in_order_traversal(bt1.root)
-# bt2.in_order_traversal(bt2.root)
+# BinaryTree.have_same_values(bt1, bt2)
+
+# # Tree 1
+# bt1 = BinaryTree()
+# bt1.add(3, bt1.root)
+# bt1.add(2, bt1.root)
+# bt1.add(5, bt1.root)
 #
-# bt1.is_equal(bt2)
+# # Tree 2
+# bt2 = BinaryTree()
+# bt2.add(3, bt2.root)
+# bt2.add(2, bt2.root)
+# bt2.add(5, bt2.root)
+# print("Trees are equal: ", bt1.equals(bt1.root, bt2.root))
+#
+# # O/P: Trees are equal:  True
+
 
 # Tree 1
 bt1 = BinaryTree()
-bt1.add(3, bt1.root)
-bt1.add(2, bt1.root)
-bt1.add(5, bt1.root)
+bt1.add('b', bt1.root)
+bt1.add('a', bt1.root)
+bt1.add('c', bt1.root)
 
 # Tree 2
 bt2 = BinaryTree()
-bt2.add(3, bt2.root)
-bt2.add(2, bt2.root)
-bt2.add(5, bt2.root)
-print("Trees are equal: ", bt1.equals(bt1.root, bt2.root))
+bt2.add('a', bt2.root)
+bt2.add('b', bt2.root)
+bt2.add('c', bt2.root)
+# bt.print_tree(bt.root)
 
-# O/P: Trees are equal:  True
+print("vlaues are equals.", BinaryTree.have_same_values(bt1, bt2))
