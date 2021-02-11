@@ -11,7 +11,7 @@ def merge(arr, l, mid, r):
     right_array = arr[mid + 1:r + 1]
     i, j = 0, 0
     # Sorting wil start in the tree from right bottom left. so sorting index need to be at left and NOT 0.
-    sorted_index = l
+    sorted_index = l  # (Its L not 1(one))
     while i < len(left_array) and j < len(right_array):
         if left_array[i] < right_array[j]:
             arr[sorted_index] = left_array[i]
